@@ -1,0 +1,103 @@
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.app-header p {
+  color: #7f8c8d;
+  font-size: 1.2rem;
+}
+
+.error-message {
+  background-color: #ffecec;
+  color: #e74c3c;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  margin: 2rem 0;
+  border: 1px solid #f5c6cb;
+}
+
+.no-results {
+  text-align: center;
+  margin: 3rem 0;
+  color: #7f8c8d;
+  font-size: 1.2rem;
+  padding: 2rem;
+  border: 1px dashed #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.app-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 1.5rem 0;
+  color: #95a5a6;
+  font-size: 0.9rem;
+  border-top: 1px solid #eee;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem;
+  }
+
+  .app-header h1 {
+    font-size: 2rem;
+  }
+
+  .app-header p {
+    font-size: 1rem;
+  }
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+  .app-container {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  .app-header h1 {
+    color: #e0e0e0;
+  }
+
+  .app-header p {
+    color: #a0a0a0;
+  }
+
+  .error-message {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #ff6b6b;
+    border-color: rgba(231, 76, 60, 0.3);
+  }
+
+  .no-results {
+    color: #a0a0a0;
+    background-color: #222;
+    border-color: #444;
+  }
+
+  .app-footer {
+    color: #777;
+    border-color: #333;
+  }
+}

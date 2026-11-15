@@ -1,69 +1,35 @@
-# React + TypeScript + Vite
+# Book Finder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[florinpop17/app-ideas](https://github.com/florinpop17/app-ideas) の課題「[Book Finder](https://github.com/florinpop17/app-ideas/blob/master/Projects/2-Intermediate/Book-Finder-App.md)」（Tier 2-Intermediate）をReactとTypeScriptで解いたもの。キーワードを入れると、Google Books APIで本を検索して一覧で表示する。
 
-Currently, two official plugins are available:
+## 課題の要件
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+| 要件 | 状態 |
+| --- | --- |
+| 検索語を入力欄に入れられる | 満たす（空白だけの入力は送らない） |
+| 送信するとAPIを呼び、タイトル・著者・出版日・画像などを持つ本の一覧を受け取る | 満たす。Google Books APIの `volumes?q=` を呼び、説明文の先頭150文字も出す |
+| 本の一覧がページに表示される | 満たす。1回の検索でAPIの既定の件数（最大10件）を表示する |
+| ボーナス: 外部サイトの詳細ページへのリンク | 満たす（Google Booksの `infoLink`） |
+| ボーナス: レスポンシブデザイン | 満たす。カードのグリッドの列数を画面幅で変える |
+| ボーナス: 読み込み中のアニメーション | 満たす（スピナー） |
 
-## Expanding the ESLint configuration
+ほかに、検索に失敗したときと0件のときのメッセージ、OSのダークモードに合わせた配色を入れた。
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 動かし方
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+APIキーは要らない。
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+npm install
+npm run dev      # Vite の開発サーバ
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 使った技術
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- React 19、TypeScript、Vite
+- Google Books API（`fetch` で呼び、レスポンスを画面用の `Book` 型に詰め替える）
+- CSS Grid（`repeat(auto-fill, minmax(...))`）とメディアクエリ
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 学んだこと
+
+- 外部APIのレスポンスに型を付け、画面で使う形に変換してから状態に入れる書き方
